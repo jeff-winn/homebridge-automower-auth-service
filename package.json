@@ -1,0 +1,38 @@
+{
+  "name": "homebridge-automower-auth-service",
+  "version": "1.0.0",
+  "description": "A service which assists the Homebridge Automower plug-in performing authentication",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeff-winn/homebridge-automower-auth-service.git"
+  },
+  "author": "Jeff Winn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeff-winn/homebridge-automower-auth-service/issues"
+  },
+  "homepage": "https://github.com/jeff-winn/homebridge-automower-auth-service#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "ws": "^8.8.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "@types/node": "^18.0.3",
+    "@types/ws": "^8.5.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.19.0",
+    "jest": "^28.1.2",
+    "jest-sonar-reporter": "^2.0.0",
+    "moq.ts": "^9.0.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^28.0.5",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  }
+}
