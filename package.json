@@ -4,7 +4,11 @@
   "description": "A service which assists the Homebridge Automower plug-in performing authentication",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src/**.ts",
+    "clean": "rimraf ./dist && rimraf ./build",
+    "build": "tsc",
+    "test": "jest --ci",
+    "release": "tsc --project tsconfig.release.json && jest -c jest.release.config.ts"
   },
   "repository": {
     "type": "git",
