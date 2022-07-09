@@ -16,10 +16,14 @@
   },
   "author": "Jeff Winn",
   "license": "MIT",
+  "homepage": "https://github.com/jeff-winn/homebridge-automower-auth-service#readme",
   "bugs": {
     "url": "https://github.com/jeff-winn/homebridge-automower-auth-service/issues"
   },
-  "homepage": "https://github.com/jeff-winn/homebridge-automower-auth-service#readme",
+  "jestSonar": {
+    "reportPath": "build",
+    "reportFile": "test-report.xml"
+  },
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
