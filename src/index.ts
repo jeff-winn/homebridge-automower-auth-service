@@ -3,6 +3,12 @@ import session from 'express-session';
 
 import { v4 as uuid } from 'uuid';
 
+declare module 'express-session' {
+    interface Session {
+        userId: string;
+    }
+}
+
 /**
  * Defines the default server port.
  */
@@ -23,7 +29,7 @@ app.use(session({
 }));
 
 app.get('/oauth/login/:id', (req, res) => {
-    req.session.id = req.params.id;
+    req.session.userId = req.params.id;
     // "https://api.authentication.husqvarnagroup.dev/v1/oauth2/authorize?client_id=<APP KEY>&redirect_uri=<REDIRECT_URI>"
 
     const redirect = encodeURI(redirectUri);
