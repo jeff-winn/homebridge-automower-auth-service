@@ -12,13 +12,14 @@ app.get('/api/v1/authorize/:id', (req, res) => {
     const code = req.query.code;
     const state = req.query.state;
 
-    const body = JSON.stringify({
-        id: req.params.id,
-        code: code,
-        state: state,
-    });
+    res.send('hello world');
+    // const body = JSON.stringify({
+    //     id: req.params.id,
+    //     code: code,
+    //     state: state,
+    // });
 
-    res.send(body);
+    // res.send(body);
 });
 
 app.listen(port, () => {
