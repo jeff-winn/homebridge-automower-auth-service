@@ -4,7 +4,8 @@
   "description": "A service which assists the Homebridge Automower plug-in performing authentication",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "release": "tsc --project tsconfig.release.json"
   },
   "repository": {
     "type": "git",
