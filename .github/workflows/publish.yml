@@ -3,7 +3,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-on: push
+on:
+  push:
+    branches: [ 'main' ]
 
 env:
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
