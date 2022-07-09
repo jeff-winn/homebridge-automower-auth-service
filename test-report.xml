@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\Users\jeffw\Code\homebridge-automower-auth-service\test\index.spec.ts">
+    <testCase name="index should be truthy" duration="4"/>
+  </file>
+</testExecutions>
