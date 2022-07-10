@@ -9,19 +9,15 @@ declare module 'express-session' {
     }
 }
 
-/**
- * Defines the default server port.
- */
-const DEFAULT_SERVER_PORT = 8080;
-
 const app = express();
 app.disable('x-powered-by'); // S5689
 
-const port = process.env.PORT ?? DEFAULT_SERVER_PORT;
-
+const port = process.env.PORT ?? 8080;
 const redirectUri = process.env.REDIRECT_URI!;
 const clientId = process.env.CLIENT_ID!;
 const clientSecret = process.env.CLIENT_SECRET!;
+
+const oauthUrl = 'https://api.authentication.husqvarnagroup.dev/v1/oauth2/authorize';
 
 app.use(session({
     secret: uuid(),
@@ -30,26 +26,23 @@ app.use(session({
 
 app.get('/oauth/login/:id', (req, res) => {
     req.session.userId = req.params.id;
-    // "https://api.authentication.husqvarnagroup.dev/v1/oauth2/authorize?client_id=<APP KEY>&redirect_uri=<REDIRECT_URI>"
 
     const redirect = encodeURI(redirectUri);
-    res.redirect(`https://api.authentication.husqvarnagroup.dev/v1/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirect}`);
+    res.redirect(`${oauthUrl}?client_id=${clientId}&redirect_uri=${redirect}`);
 });
 
 app.get('/oauth/notify', (req, res) => {
     const code = req.query.code;
     const state = req.query.state;
-    const id = req.session.id;
+    const id = req.session.userId;
 
     console.log(`[${id}] Code: ${code}`);
     console.log(`[${id}] State: ${state}`);
     
-    // const body = JSON.stringify({
-    //     id: req.params.id,
-    //     code: code,
-    //     state: state,
-    // });
+    res.redirect('/oauth/success');
+});
 
+app.get('/oauth/success', (req, res) => {
     res.send('Got it! You can close this page.');
 });
 
