@@ -12,7 +12,7 @@ declare module 'express-session' {
 const app = express();
 app.disable('x-powered-by'); // S5689
 
-const port = process.env.PORT ?? 8080;
+const port = process.env.PORT ?? 3000;
 const redirectUri = process.env.REDIRECT_URI!;
 const clientId = process.env.CLIENT_ID!;
 const clientSecret = process.env.CLIENT_SECRET!;
@@ -21,8 +21,14 @@ const oauthUrl = 'https://api.authentication.husqvarnagroup.dev/v1/oauth2/author
 
 app.use(session({
     secret: uuid(),
+    resave: false,
+    saveUninitialized: false,
     cookie: { secure: true }        
 }));
+
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
 
 app.get('/oauth/login/:id', (req, res) => {
     req.session.userId = req.params.id;
