@@ -25,6 +25,7 @@ app.use(session({
     secret: uuid(),
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: { secure: true, httpOnly: true }        
 }));
 
