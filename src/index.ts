@@ -1,7 +1,9 @@
 import express from 'express';
 import session from 'express-session';
-
+import { config } from 'dotenv';
 import { v4 as uuid } from 'uuid';
+
+// config();
 
 declare module 'express-session' {
     interface Session {
@@ -23,7 +25,7 @@ app.use(session({
     secret: uuid(),
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: true }        
+    cookie: { secure: true, httpOnly: true }        
 }));
 
 app.get('/health', (req, res) => {
