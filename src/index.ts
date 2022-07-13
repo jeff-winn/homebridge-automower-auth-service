@@ -3,7 +3,7 @@ import session from 'express-session';
 import nconf from 'nconf';
 
 import { v4 as uuid } from 'uuid';
-import { config } from 'dotenv';
+// import { config } from 'dotenv';
 
 declare module 'express-session' {
     interface Session {
@@ -11,7 +11,7 @@ declare module 'express-session' {
     }
 }
 
-config();
+// config();
 
 nconf.argv().env()
     .file('default', { file: 'config/default.json' })
