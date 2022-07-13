@@ -1,0 +1,5 @@
+{
+    "production": false,
+    "oauthUrl": "https://api.authentication.husqvarnagroup.dev/v1/oauth2/authorize",
+    "redirectUri": "https://hb-automower-auth-service.azurewebsites.net/oauth/notify"
+}

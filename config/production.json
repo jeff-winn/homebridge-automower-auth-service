@@ -1,0 +1,4 @@
+{
+    "production": true,
+    "redirectUri": "https://hb-automower-auth-service.azurewebsites.net/oauth/notify"
+}

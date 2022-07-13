@@ -1,9 +1,9 @@
 import express from 'express';
 import session from 'express-session';
-import { config } from 'dotenv';
-import { v4 as uuid } from 'uuid';
+import nconf from 'nconf';
 
-// config();
+import { v4 as uuid } from 'uuid';
+import { config } from 'dotenv';
 
 declare module 'express-session' {
     interface Session {
@@ -11,22 +11,25 @@ declare module 'express-session' {
     }
 }
 
+config();
+
+nconf.argv().env()
+    .file('default', { file: 'config/default.json' })
+    .file('env', { file: `config/${process.env.NODE_ENV}.json` });
+
 const app = express();
 app.disable('x-powered-by'); // S5689
 
-const port = process.env.PORT ?? 3000;
-const redirectUri = process.env.REDIRECT_URI!;
-const clientId = process.env.CLIENT_ID!;
-const clientSecret = process.env.CLIENT_SECRET!;
-
-const oauthUrl = 'https://api.authentication.husqvarnagroup.dev/v1/oauth2/authorize';
+const port = nconf.get('PORT');
+const redirectUri = nconf.get('redirectUri');
+const prod = nconf.get('production');
 
 app.use(session({
     secret: uuid(),
     resave: false,
     saveUninitialized: false,
-    proxy: true,
-    cookie: { secure: true, httpOnly: true }        
+    proxy: prod,
+    cookie: { secure: prod, httpOnly: true }        
 }));
 
 app.get('/health', (req, res) => {
@@ -36,8 +39,7 @@ app.get('/health', (req, res) => {
 app.get('/oauth/login/:id', (req, res) => {
     req.session.userId = req.params.id;
 
-    const redirect = encodeURI(redirectUri);
-    res.redirect(`${oauthUrl}?client_id=${clientId}&redirect_uri=${redirect}`);
+    res.redirect(`${nconf.get('oauthUrl')}?client_id=${nconf.get('CLIENT_ID')}&redirect_uri=${encodeURI(redirectUri)}`);
 });
 
 app.get('/oauth/notify', (req, res) => {
