@@ -3,7 +3,7 @@ import session from 'express-session';
 import nconf from 'nconf';
 
 import { v4 as uuid } from 'uuid';
-// import { config } from 'dotenv';
+import { config } from 'dotenv';
 
 declare module 'express-session' {
     interface Session {
@@ -11,7 +11,7 @@ declare module 'express-session' {
     }
 }
 
-// config();
+config();
 
 nconf.argv().env()
     .file('default', { file: 'config/default.json' })
@@ -20,7 +20,7 @@ nconf.argv().env()
 const app = express();
 app.disable('x-powered-by'); // S5689
 
-const port = nconf.get('PORT');
+const port = process.env.PORT || 3000;
 const redirectUri = nconf.get('redirectUri');
 const prod = nconf.get('production');
 
