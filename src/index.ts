@@ -21,6 +21,7 @@ const app = express();
 app.disable('x-powered-by'); // S5689
 
 const port = process.env.PORT || 3000;
+const clientId = process.env.CLIENT_ID!;
 const redirectUri = nconf.get('redirectUri');
 const prod = nconf.get('production');
 
@@ -39,7 +40,7 @@ app.get('/health', (req, res) => {
 app.get('/oauth/login/:id', (req, res) => {
     req.session.userId = req.params.id;
 
-    res.redirect(`${nconf.get('oauthUrl')}?client_id=${nconf.get('CLIENT_ID')}&redirect_uri=${encodeURI(redirectUri)}`);
+    res.redirect(`${nconf.get('oauthUrl')}?client_id=${clientId}&redirect_uri=${encodeURI(redirectUri)}`);
 });
 
 app.get('/oauth/notify', (req, res) => {
