@@ -14,8 +14,8 @@ declare module 'express-session' {
 config();
 
 nconf.argv().env()
-    .file('default', { file: 'config/default.json' })
-    .file('env', { file: `config/${process.env.NODE_ENV}.json` });
+    .file('default', { file: './config/default.json' })
+    .file('env', { file: `./config/${process.env.NODE_ENV}.json` });
 
 const app = express();
 app.disable('x-powered-by'); // S5689
@@ -58,5 +58,6 @@ app.get('/oauth/success', (req, res) => {
 });
 
 app.listen(port, () => {        
+    console.log(`PWD: ${process.env.PWD}`);
     console.log(`Server listening on port: ${port}`);
 });
